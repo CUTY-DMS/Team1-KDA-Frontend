@@ -10,7 +10,7 @@ function SignInPage() {
                 <Img><img src="/images/signpagelogo.svg" alt="" /></Img>
             </TopBox>
             <InputBox>
-                <TextField width={1000} height={50}/>
+                <TextField width={1000} height={50} text="이메일"/>
             </InputBox>
         </Body>
     )
