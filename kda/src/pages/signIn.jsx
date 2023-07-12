@@ -1,10 +1,14 @@
 import React from "react";
 import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
+import Button from "../components/common/Button";
 
 function SignInPage() {
     const onForgetPassword = () => {
         window.location.href = "/forgetPassword";
+    };
+    const onSignUp = () => {
+        window.location.href = "/signUp";
     };
 
     return (
@@ -21,6 +25,13 @@ function SignInPage() {
                 <span>비밀번호를 잊으셨나요?&nbsp;&nbsp;</span>
                 <span onClick={onForgetPassword}>비밀번호 찾기</span>
             </LinkBox>
+            <BottomBox>
+                <Button red={false} width={300} text="로그인">sdf</Button>
+            </BottomBox>
+            <LinkBox2>
+                <span>계정이 없으신가요?&nbsp;&nbsp;</span>
+                <span onClick={onSignUp}>회원가입</span>
+            </LinkBox2>
         </Body>
     )
 }
@@ -61,7 +72,7 @@ const TopBox = styled.div`
     width:1000px;
     height:200px;
     align-items:center;
-    margin-top:49px;
+    margin-top:40px;
 `;
 
 const InputBox = styled.div`
@@ -77,13 +88,61 @@ const LinkBox = styled.div`
     display:flex;
     justify-content:end;
     span {
+        font-weight:100;
         font-size:20px;
         cursor:default;
         position:relative;
         bottom:9px;
+        transition:0.1s ease-in-out;
+        &:hover {
+            opacity: .8;
+        }
+    }
+    :first-child {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     :last-child {
         color:#7c7c7c;
         cursor: pointer;
     }
+`;
+
+const LinkBox2 = styled.div`
+    width:1000px;
+    display:flex;
+    justify-content:end;
+    span {
+        font-weight:100;
+        font-size:20px;
+        cursor:default;
+        margin-top:5px;
+    }
+    :first-child {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    :last-child {
+        color:#7c7c7c;
+        cursor: pointer;
+        transition:0.1s ease-in-out;
+        &:hover {
+            opacity: .8;
+        }
+    }
+`;
+
+const BottomBox = styled.div`
+    width:1000px;
+    margin-top:340px;
+    display:flex;
+    justify-content:end;
 `;
