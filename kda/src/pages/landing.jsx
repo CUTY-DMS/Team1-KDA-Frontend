@@ -2,15 +2,18 @@ import React from "react";
 import { styled } from "styled-components";
 
 function LandingPage() {
-    const onlogin = () => {
+    const onSignin = () => {
         window.location.href = "/signIn";
+    };
+    const onSignUp = () => {
+        window.location.href = "/signUp";
     };
 
     return (
         <Body>
             <Img><img src="/images/logo.svg" alt=""/></Img>
             <MainText><span>KDA</span>에 오신걸 환영합니다!</MainText>
-            <BottomText><span onClick={onlogin}>로그인</span><span>회원가입</span></BottomText>
+            <BottomText><span onClick={onSignin}>로그인</span><span onClick={onSignUp}>회원가입</span></BottomText>
         </Body>
     )
 }

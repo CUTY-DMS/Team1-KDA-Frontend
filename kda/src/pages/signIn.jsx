@@ -5,7 +5,7 @@ import Button from "../components/common/Button";
 
 function SignInPage() {
     const onForgetPassword = () => {
-        window.location.href = "/forgetPassword";
+        window.location.href = "/findPassword";
     };
     const onSignUp = () => {
         window.location.href = "/signUp";
@@ -26,7 +26,7 @@ function SignInPage() {
                 <span onClick={onForgetPassword}>비밀번호 찾기</span>
             </LinkBox>
             <BottomBox>
-                <Button red={false} width={300} text="로그인">sdf</Button>
+                <Button red={false} width={300} text="로그인"></Button>
             </BottomBox>
             <LinkBox2>
                 <span>계정이 없으신가요?&nbsp;&nbsp;</span>
@@ -142,7 +142,7 @@ const LinkBox2 = styled.div`
 
 const BottomBox = styled.div`
     width:1000px;
-    margin-top:340px;
+    margin-top:354px;
     display:flex;
     justify-content:end;
 `;

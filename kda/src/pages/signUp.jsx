@@ -28,7 +28,7 @@ function SignInPage() {
             </InputBox>
             <BottomBox>
                 <TextField type="password" width={650} height={50} text="인증코드"/>
-                <Button red={false} width={300} text="회원가입">sdf</Button>
+                <Button red={false} width={300} text="회원가입"></Button>
             </BottomBox>
             <LinkBox>
                 <span>계정이 있으신가요?&nbsp;&nbsp;</span>
