@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-function TextField({width,height,text}) {
+function TextField({width,height,text,type}) {
     const [upText, setFocus] = useState(false);
 
     const onFocus = () => {
@@ -15,7 +15,7 @@ function TextField({width,height,text}) {
 
     return (
         <Wrapper width={width} height={height}>
-            <Input width={width} height={height} onFocus={onFocus} onBlur={onBlur}/>
+            <Input type={type} width={width} height={height} onFocus={onFocus} onBlur={onBlur}/>
             <Label upText={upText}>{text}</Label>
         </Wrapper>
     )
@@ -41,10 +41,18 @@ const Input = styled.input`
 
 const Label = styled.label`
     font-size: ${({ upText }) => (upText ? "16px" : "24px")};
+    color: ${({ upText }) => (upText ? "#7C7C7C" : "black")};
     font-weight: 100;
     pointer-events: none;
+    cursor:none;
     position: relative;
     transition:0.2s ease-in-out;
     bottom: ${({ upText }) => (upText ? "60px" : "34px")};
     left: ${({ upText }) => (upText ? "13px" : "10px")};
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 `;
