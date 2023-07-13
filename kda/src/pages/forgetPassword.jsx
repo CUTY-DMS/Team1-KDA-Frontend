@@ -99,6 +99,7 @@ const LinkBox = styled.div`
         transition:0.1s ease-in-out;
         &:hover {
             opacity: .8;
+            text-decoration:underline;
         }
         -webkit-touch-callout: none;
         -webkit-user-select: none;

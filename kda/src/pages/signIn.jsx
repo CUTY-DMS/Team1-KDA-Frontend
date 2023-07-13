@@ -93,10 +93,6 @@ const LinkBox = styled.div`
         cursor:default;
         position:relative;
         bottom:9px;
-        transition:0.1s ease-in-out;
-        &:hover {
-            opacity: .8;
-        }
     }
     :first-child {
         -webkit-touch-callout: none;
@@ -109,6 +105,11 @@ const LinkBox = styled.div`
     :last-child {
         color:#7c7c7c;
         cursor: pointer;
+        transition:0.1s ease-in-out;
+        &:hover {
+            text-decoration:underline;
+            opacity: .8;
+        }
     }
 `;
 
@@ -136,6 +137,7 @@ const LinkBox2 = styled.div`
         transition:0.1s ease-in-out;
         &:hover {
             opacity: .8;
+            text-decoration:underline;
         }
     }
 `;

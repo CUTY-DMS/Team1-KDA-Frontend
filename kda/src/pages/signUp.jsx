@@ -16,18 +16,18 @@ function SignInPage() {
                 <Img><img src="/images/signpagelogo.svg" alt="" /></Img>
             </TopBox>
             <InputBox>
-                <TextField type="email" width={1000} height={50} text="이름"/>
-                <TextField type="password" width={1000} height={50} text="이메일"/>
+                <TextField type="text" width={1000} height={50} text="이름"/>
+                <TextField type="email" width={1000} height={50} text="이메일"/>
                 <TextField type="password" width={1000} height={50} text="비밀번호"/>
                 <TextField type="password" width={1000} height={50} text="비밀번호 확인"/>
                 <InnerInputBox>
-                    <TextField type="password" width={310} height={50} text="학년"/>
-                    <TextField type="password" width={310} height={50} text="반"/>
-                    <TextField type="password" width={310} height={50} text="생년월일 (ex 20001212)"/>
+                    <TextField type="text" width={310} height={50} text="학년"/>
+                    <TextField type="text" width={310} height={50} text="반"/>
+                    <TextField type="text" width={310} height={50} text="생년월일 (ex 20001212)"/>
                 </InnerInputBox>
             </InputBox>
             <BottomBox>
-                <TextField type="password" width={650} height={50} text="인증코드"/>
+                <TextField type="text" width={650} height={50} text="교사 확인 코드"/>
                 <Button red={false} width={300} text="회원가입"></Button>
             </BottomBox>
             <LinkBox>
@@ -120,6 +120,7 @@ const LinkBox = styled.div`
         transition:0.1s ease-in-out;
         &:hover {
             opacity: .8;
+            text-decoration:underline;
         }
     }
 `;

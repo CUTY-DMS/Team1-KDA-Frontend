@@ -65,5 +65,10 @@ const BottomText = styled.div`
         font-size: 20px;
         font-weight: 300;
         cursor:pointer;
+        transition:0.1s ease-in-out;
+        &:hover {
+            text-decoration:underline;
+            opacity: .8;
+        }
     }
 `;
