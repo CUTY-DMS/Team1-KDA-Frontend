@@ -55,6 +55,7 @@ const LeftBox = styled.div`
     span {
         font-weight:100;
         font-size:18px;
+        color:#7C7C7C;
     }
 `;
 
@@ -85,13 +86,14 @@ const RigthBoxInnerBox = styled.div`
     display:flex;
     flex-direction:column;
     margin-left:25px;
+    align-items:end;
 
     :first-child {
-        font-size:26px;
+        font-size:18px;
         font-weight:100;
     }
     :last-child {
-        font-size:20px;
+        font-size:15px;
         font-weight:100;
         color:#7C7C7C;
     }
