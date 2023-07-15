@@ -13,7 +13,7 @@ function SignInPage() {
         <Body>
             <TopBox>
                 <Title>로그인</Title>
-                <Img><img src="/images/signpagelogo.svg" alt="" /></Img>
+                <Img><img src="/images/signpagelogo.svg"/></Img>
             </TopBox>
             <InputBox>
                 <TextField type="text" width={1000} height={50} text="이름"/>
