@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 
-function SignInPage() {
+function SignUpPage() {
 
     const onSignIn = () => {
         window.location.href = "/signIn";
@@ -38,7 +38,7 @@ function SignInPage() {
     )
 }
 
-export default SignInPage;
+export default SignUpPage;
 
 const Body = styled.div`
     display:flex;

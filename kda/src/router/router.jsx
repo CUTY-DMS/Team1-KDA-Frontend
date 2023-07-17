@@ -5,6 +5,7 @@ import SignUpPage from "../pages/signUp";
 import MainPage from "../pages/main";
 import FindPassword from "../pages/forgetPassword";
 import LoadingPage from "../pages/loading/loading";
+import MyPage from "../pages/myInformation";
 
 export const Router = () => {
     return (
@@ -15,6 +16,7 @@ export const Router = () => {
                 <Route path="/signUp" element={<SignUpPage/>} />
                 <Route path="/findPassword" element={<FindPassword/>} />
                 <Route path="/main" element={<MainPage/>} />
+                <Route path="/myInformation" element={<MyPage/>} />
                 <Route path="/test" element={<LoadingPage/>} />
                 <Route path="*" element={<>올바르지 않은 경로입니다!</>} />
             </Routes>
