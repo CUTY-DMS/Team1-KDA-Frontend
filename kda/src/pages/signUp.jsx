@@ -1,34 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
+import { signUpPost } from "../apis/signUp";
 
 function SignUpPage() {
+    const [data, setData] = useState({
+        email:"",
+        teachGrade:"",
+        teachClass:"",
+        name:"",
+        password:"",
+        birth:"",
+        code:"",
+        okPassword:""
+    })
+
+    const {email, teachGrade, teachClass, name, password, birth, code, okPassword} = data;
 
     const onSignIn = () => {
         window.location.href = "/signIn";
     };
 
+    const onClick = () => {
+        signUpPost(data)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error(err.response.status);
+                alert("error");
+            });
+    };
+
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+            ...data,
+            [name]: value
+        });
+    };
+
     return (
         <Body>
             <TopBox>
-                <Title>로그인</Title>
+                <Title>회원가입</Title>
                 <Img><img src="/images/signpagelogo.svg"/></Img>
             </TopBox>
             <InputBox>
-                <TextField type="text" width={1000} height={50} text="이름"/>
-                <TextField type="email" width={1000} height={50} text="이메일"/>
-                <TextField type="password" width={1000} height={50} text="비밀번호"/>
-                <TextField type="password" width={1000} height={50} text="비밀번호 확인"/>
+                <TextField type="text" width={1000} height={50} text="이름" name="name" value={name} event={onChange}/>
+                <TextField type="email" width={1000} height={50} text="이메일" name="email" value={email} event={onChange}/>
+                <TextField type="password" width={1000} height={50} text="비밀번호" name="password" value={password} event={onChange}/>
+                <TextField type="password" width={1000} height={50} text="비밀번호 확인" name="okPassword" value={okPassword} event={onChange}/>
                 <InnerInputBox>
-                    <TextField type="text" width={310} height={50} text="학년"/>
-                    <TextField type="text" width={310} height={50} text="반"/>
-                    <TextField type="text" width={310} height={50} text="생년월일 (ex 20001212)"/>
+                    <TextField type="text" width={310} height={50} text="학년" name="teachGrade" value={teachGrade} event={onChange}/>
+                    <TextField type="text" width={310} height={50} text="반" name="teachClass" value={teachClass} event={onChange}/>
+                    <TextField type="text" width={310} height={50} text="생년월일 (ex 20001212)" name="birth" value={birth} event={onChange}/>
                 </InnerInputBox>
             </InputBox>
             <BottomBox>
-                <TextField type="text" width={650} height={50} text="교사 확인 코드"/>
-                <Button red={false} width={300} text="회원가입"></Button>
+                <TextField type="text" width={650} height={50} text="교사 확인 코드" name="code" value={code} event={onChange}/>
+                <Button red={false} width={300} text="회원가입" event={onClick}></Button>
             </BottomBox>
             <LinkBox>
                 <span>계정이 있으신가요?&nbsp;&nbsp;</span>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-function TextField({width,height,text,type}) {
+function TextField({width,height,text,type,name,value,event}) {
     const [upText, setFocus] = useState(false);
 
     const onFocus = () => {
@@ -15,7 +15,7 @@ function TextField({width,height,text,type}) {
 
     return (
         <Wrapper width={width} height={height}>
-            <Input type={type} width={width} height={height} onFocus={onFocus} onBlur={onBlur}/>
+            <Input type={type} width={width} height={height} value={value} name={name} onFocus={onFocus} onBlur={onBlur} onChange={event}/>
             <Label upText={upText}>{text}</Label>
         </Wrapper>
     )

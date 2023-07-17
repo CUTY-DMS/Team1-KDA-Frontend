@@ -1,9 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
 
-function Button({red,text,width}) {
+function Button({red,text,width,event}) {
     return (
-        <Btn width={width} red={red}>
+        <Btn width={width} red={red} onClick={event}>
             {text}
         </Btn>
     )
