@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
+import { signInPost } from "../apis/signIn";
 
 function SignInPage() {
+    const [data, setData] = useState({
+        email:"",
+        password:""
+    })
+
+    const {email, password} = data;
+
+    const onClick = () => {
+        signInPost(data)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error(err.response.status);
+                alert("error");
+            });
+    };
+
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+            ...data,
+            [name]: value
+        });
+    };
+
     const onForgetPassword = () => {
         window.location.href = "/findPassword";
     };
@@ -18,15 +45,15 @@ function SignInPage() {
                 <Img><img src="/images/signpagelogo.svg"/></Img>
             </TopBox>
             <InputBox>
-                <TextField type="email" width={1000} height={50} text="이메일"/>
-                <TextField type="password" width={1000} height={50} text="비밀번호"/>
+                <TextField type="email" width={1000} height={50} text="이메일" name="email" value={email} event={onChange}/>
+                <TextField type="password" width={1000} height={50} text="비밀번호" name="password" value={password} event={onChange}/>
             </InputBox>
             <LinkBox>
                 <span>비밀번호를 잊으셨나요?&nbsp;&nbsp;</span>
                 <span onClick={onForgetPassword}>비밀번호 찾기</span>
             </LinkBox>
             <BottomBox>
-                <Button red={false} width={300} text="로그인"></Button>
+                <Button red={false} width={300} text="로그인" event={onClick}></Button>
             </BottomBox>
             <LinkBox2>
                 <span>계정이 없으신가요?&nbsp;&nbsp;</span>
