@@ -28,7 +28,10 @@ function SignUpPage() {
                 console.log(res);
             })
             .catch((err) => {
-                console.error(err.response.status);
+                const error = err.response.status;
+                if(error === 403) {
+                    
+                }
                 alert("error");
             });
     };
