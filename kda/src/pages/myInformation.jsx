@@ -1,6 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "../components/common/Button";
 
 function MyPage() {
     return (
@@ -21,9 +24,10 @@ function MyPage() {
                     </InfoBox>
                 </TopBox>
                 <BtnBox>
-                    <div className="btn">담당 변경<span></span></div>
-                    <div className="btn">생년월일 변경</div>
-                    <div className="btn">비밀번호 변경</div>
+                    <div className="btn">담당학급 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn">생년월일 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn">비밀번호 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <Button red={false} width={300} text="저장"></Button>
                 </BtnBox>
             </Body>
         </>
@@ -65,20 +69,27 @@ const NameBox = styled.div`
         font-weight:700;
     }
     :last-child {
-        color: #7C7C7C;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 100;
+        color:#7c7c7c;
+        cursor: pointer;
+        transition:0.1s ease-in-out;
+        &:hover {
+            text-decoration:underline;
+            opacity: .8;
+        }
     }
 `;
 
 const InfoBox = styled.div`
+    margin-bottom:26px;
     margin-left:30px;
     display:flex;
     flex-direction:column;
     width:120px;
     span {
         font-weight:300;
-        font-size:20px;
+        font-size:18px;
     }
 `;
 
@@ -87,7 +98,9 @@ const BtnBox = styled.div`
     width:800px;
     display:flex;
     flex-direction:column;
+    align-items:center;
     .btn {
+        cursor: pointer;
         width:800px;
         height:100px;
         border:#609966 4px solid;
@@ -104,10 +117,6 @@ const BtnBox = styled.div`
         -ms-user-select: none;
         user-select: none;
         transition:0.2s ease-in-out;
-        &:hover {
-            background-color:#609966;
-            color:white;
-        }
         span {
             display:inline-block;
             width:70px;
@@ -115,11 +124,30 @@ const BtnBox = styled.div`
             background-color:#609966;
             border-radius:50%;
             position:absolute;
-            margin-left:255px;
+            margin-left:235px;
             margin-top:15px;
+            transform:rotate(45deg);
+            transition:0.2s ease-in-out;
+            .icon {
+                color:white;
+                transition:0.2s ease-in-out;
+            }
+        }
+        &:hover {
+            background-color:#609966;
+            color:white;
+            span {
+                background-color:white;
+                .icon {
+                    color:#609966;
+                }
+            }
         }
     }
     :first-child {
         margin-top:0;
+    }
+    > :last-child {
+        margin-top:100px;
     }
 `;
