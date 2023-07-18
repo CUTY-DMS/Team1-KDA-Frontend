@@ -6,6 +6,12 @@ import MainPage from "../pages/main";
 import FindPassword from "../pages/forgetPassword";
 import LoadingPage from "../pages/loading/loading";
 import MyPage from "../pages/myInformation";
+import StudentPage from "../pages/viewStudent";
+import NotificationPage from "../pages/notification";
+import NotificationCreatePage from "../pages/notificationCreate";
+import NotificationModifyPage from "../pages/notificationModify";
+import NotificationDetailPage from "../pages/notificationDetail";
+import CalenderPage from "../pages/calender";
 
 export const Router = () => {
     return (
@@ -17,6 +23,12 @@ export const Router = () => {
                 <Route path="/findPassword" element={<FindPassword/>} />
                 <Route path="/main" element={<MainPage/>} />
                 <Route path="/myInformation" element={<MyPage/>} />
+                <Route path="/student" element={<StudentPage/>} />
+                <Route path="/notification" element={<NotificationPage/>} />
+                <Route path="/notificationCreate" element={<NotificationCreatePage/>} />
+                <Route path="/notificationModify" element={<NotificationModifyPage/>} />
+                <Route path="/notificationDetail" element={<NotificationDetailPage/>} />
+                <Route path="/calender" element={<CalenderPage/>} />
                 <Route path="/test" element={<LoadingPage/>} />
                 <Route path="*" element={<>올바르지 않은 경로입니다!</>} />
             </Routes>

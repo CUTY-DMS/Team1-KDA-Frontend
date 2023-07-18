@@ -14,7 +14,7 @@ export default Button;
 const Btn = styled.button`
     width:${({width}) => (width ? `${width}px` : "100px")};
     background-color:${({red}) => (red ? `#B44646` : "#609966")};
-    font-weight:100 !important;
+    font-weight:100;
     font-size:24px;
     height:50px;
     color:white;
