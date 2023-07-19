@@ -89,7 +89,7 @@ const RigthBoxInnerBox = styled.div`
     align-items:end;
 
     :first-child {
-        font-size:18px;
+        font-size:20px;
         font-weight:100;
     }
     :last-child {

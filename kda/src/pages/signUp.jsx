@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 import { signUpPost } from "../apis/signUp";
-import { customToast } from "../utils/toast/toast";
+import CustomToastContainer from "../utils/toast/customToastContainer";
+import { customToast } from "../utils/toast/customToast";
 
 function SignUpPage() {
     const [data, setData] = useState({
@@ -24,8 +25,8 @@ function SignUpPage() {
     };
 
     const onClick = () => {
-        customToast("비밀번호 확인을 실패했습니다.","warn");
-        if(password !== okPassword) {
+        if(password != okPassword) {
+            customToast("비밀번호 확인을 실패했습니다.","error");
             return;
         }
         signUpPost(data)
@@ -33,7 +34,10 @@ function SignUpPage() {
                 console.log(res);
             })
             .catch((err) => {
-                const error = err.response.status;
+                const error = err;
+                console.log(error);
+                console.log(error);
+                console.log(error);
                 if(error === 403) {
                     customToast("이미 가입한 이메일입니다.");
                 } else if(error === 500) {
@@ -49,10 +53,6 @@ function SignUpPage() {
             [name]: value
         });
     };
-
-    const asd = () => {
-        customToast("개발자 에러", "error");
-    }
 
     return (
         <Body>
@@ -74,12 +74,12 @@ function SignUpPage() {
             <BottomBox>
                 <TextField type="text" width={650} height={50} text="교직원 확인 코드" name="code" value={code} event={onChange}/>
                 <Button red={false} width={300} text="회원가입" event={onClick}></Button>
-                <button onClick={asd}>click</button>
             </BottomBox>
             <LinkBox>
                 <span>계정이 있으신가요?&nbsp;&nbsp;</span>
                 <span onClick={onSignIn}>로그인</span>
             </LinkBox>
+            <CustomToastContainer/>
         </Body>
     )
 }
