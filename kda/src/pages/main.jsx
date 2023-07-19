@@ -7,11 +7,9 @@ function MainPage() {
 
     useEffect(()=>{
         const timeId = setInterval(()=>tick(),1000)
-        console.log('setInteval')
 
         return() =>{
             clearInterval(timeId)
-            console.log('clearInterval')
         }
     })
 
