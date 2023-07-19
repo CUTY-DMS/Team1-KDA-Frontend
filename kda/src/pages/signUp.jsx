@@ -34,14 +34,14 @@ function SignUpPage() {
                 console.log(res);
             })
             .catch((err) => {
-                const error = err;
+                const error = err.response.status;
                 console.log(error);
-                console.log(error);
-                console.log(error);
+                console.log(err.response);
+                console.log(err);
                 if(error === 403) {
                     customToast("이미 가입한 이메일입니다.");
                 } else if(error === 500) {
-                    customToast("교직원 인증 코드가 유효하지 않습니다.","error");
+                    customToast("코드가 유효하지 않습니다.","error");
                 }
             });
     };
