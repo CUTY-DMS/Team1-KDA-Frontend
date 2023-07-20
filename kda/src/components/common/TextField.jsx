@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 const Input = styled.input`
     width:${({width}) => (width ? `${width-20}px` : "100px")};
     height:${({height}) => (height ? `${height-10}px` : "50px")};
-    font-size:24px;
+    font-size:22px;
     height:25px;
     border:0;
     border-bottom:1px solid black;
@@ -40,7 +40,7 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-    font-size: ${({ upText }) => (upText ? "16px" : "24px")};
+    font-size: ${({ upText }) => (upText ? "16px" : "20px")};
     color: ${({ upText }) => (upText ? "#7C7C7C" : "black")};
     font-weight: 100;
     pointer-events: none;
