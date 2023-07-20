@@ -73,7 +73,7 @@ const TopBox = styled.div`
 
 const InputBox = styled.div`
     width:1000px;
-    margin-top:120px;
+    margin-top:50px;
     :last-child {
         margin-top:70px;
     }
