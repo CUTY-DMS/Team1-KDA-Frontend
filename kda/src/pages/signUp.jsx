@@ -79,7 +79,6 @@ function SignUpPage() {
                 <span>계정이 있으신가요?&nbsp;&nbsp;</span>
                 <span onClick={onSignIn}>로그인</span>
             </LinkBox>
-            <CustomToastContainer/>
         </Body>
     )
 }

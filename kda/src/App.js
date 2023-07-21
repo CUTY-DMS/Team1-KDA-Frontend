@@ -1,11 +1,16 @@
 import { Suspense } from "react";
 import { Router } from "./router/router";
+import { RecoilRoot } from "recoil";
+import CustomToastContainer from "./utils/toast/customToastContainer";
 
 function App() {
   return (
-    <Suspense fallback={<>Loading...</>}>
-      <Router/>
-    </Suspense>
+    <RecoilRoot>
+      <Suspense fallback={<>Loading...</>}>
+        <Router/>
+        <CustomToastContainer/>
+      </Suspense>
+    </RecoilRoot>
   );
 }
 
