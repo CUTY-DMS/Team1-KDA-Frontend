@@ -1,30 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
+import { viewStudent } from "../apis/viewStudent";
+import axios from "axios";
 
 function StudentPage() {
-    const [students, setStudents] = useState([{
-        username : "권민휘",
-        classId : "1101",
-    },{
-        username : "김가은",
-        classId : "1102",
-    }])
+    const [students, setStudents] = useState();
+    const [gradeClass, setGradeClass] = useState(12);
+
+    useEffect(() => {
+        const response = viewStudent(gradeClass)
+        .then((res) => {
+            console.log(res);
+            setStudents(response.data);
+        })
+        .catch((err) => {
+            console.log(err);
+            alert("error");
+            console.log(response.data);
+        });
+    },[])
 
     return (
         <>
             <Header/>
             <Body>
                 <ListContainer>
-                    {students.map((student) => (
+                    {students ? students.map((student) => (
                         <ListContent>
                             <Img><img src=""/></Img>
                             <TextBox>
-                                <span>{student.classId}&nbsp;{student.username}</span>
+                                <span>{student.classId}&nbsp;{student.name}</span>
                                 <span>더보기</span>
                             </TextBox>
                         </ListContent>
-                    ))}
+                    )) : <>roading..</>}
                 </ListContainer>
             </Body>
         </>
