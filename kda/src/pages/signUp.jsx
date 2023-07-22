@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 import { signUpPost } from "../apis/signUp";
-import CustomToastContainer from "../utils/toast/customToastContainer";
 import { customToast } from "../utils/toast/customToast";
 
 function SignUpPage() {
