@@ -32,11 +32,12 @@ function MyPage() {
                     </InfoBox>
                 </TopBox>
                 <BtnBox>
-                    <div className="btn" onClick={() => {onModal('gradeClass')}}>담당학급 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
-                    <div className="btn" onClick={() => {onModal('birth')}}>생년월일 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn" onClick={() => {onModal('gradeClass')}}>정보 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
                     <div className="btn" onClick={() => {onModal('password')}}>비밀번호 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
-                    <Button red={false} width={300} text="저장"></Button>
                 </BtnBox>
+                <BottomBox>
+                    <Button red={false} width={300} text="저장"></Button>
+                </BottomBox>
             </Body>
         </>
     )
@@ -102,22 +103,24 @@ const InfoBox = styled.div`
 `;
 
 const BtnBox = styled.div`
-    margin-top:50px;
+    margin-top:20px;
     width:800px;
     display:flex;
-    flex-direction:column;
-    align-items:center;
+    justify-content:space-between;
     .btn {
         cursor: pointer;
-        width:800px;
-        height:100px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        width:300px;
+        height:400px;
         border:#609966 4px solid;
-        border-radius:100px;
+        border-radius:10px;
         margin-top:26px;
         font-weight: 100;
         font-size:26px;
         text-align:center;
-        line-height:100px;
+        line-height:120px;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -126,14 +129,15 @@ const BtnBox = styled.div`
         user-select: none;
         transition:0.2s ease-in-out;
         span {
+            line-height:100px;
             display:inline-block;
             width:70px;
             height:70px;
             background-color:#609966;
             border-radius:50%;
             position:absolute;
-            margin-left:235px;
-            margin-top:15px;
+            margin-top:320px;
+            margin-left:210px;
             transform:rotate(45deg);
             transition:0.2s ease-in-out;
             .icon {
@@ -142,9 +146,11 @@ const BtnBox = styled.div`
             }
         }
         &:hover {
+            transform:scale(1.1);
             background-color:#609966;
             color:white;
             span {
+                transform:scale(1.1);
                 background-color:white;
                 .icon {
                     color:#609966;
@@ -152,10 +158,8 @@ const BtnBox = styled.div`
             }
         }
     }
-    :first-child {
-        margin-top:0;
-    }
-    > :last-child {
-        margin-top:100px;
-    }
+`;
+
+const BottomBox = styled.div`
+    margin-top:80px;
 `;
