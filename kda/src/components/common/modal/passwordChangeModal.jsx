@@ -47,7 +47,7 @@ const InputBox = styled.div`
 `;
 
 const BtnBox = styled.div`
-    margin-top:30px;
+    margin-top:80px;
     display:flex;
     width:660px;
     justify-content:space-between;
