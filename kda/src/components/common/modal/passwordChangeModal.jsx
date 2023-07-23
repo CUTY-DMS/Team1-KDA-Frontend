@@ -3,8 +3,12 @@ import ModalBackground from "./background";
 import { styled } from "styled-components";
 import TextField from "../TextField";
 import Button from "../Button";
+import { useResetRecoilState } from "recoil";
+import { modalState } from "../../../utils/atom/atom";
 
 function PasswordChangeModal() {
+    const closeModal = useResetRecoilState(modalState);
+
     return (
         <ModalBackground>
             <Body>
@@ -15,7 +19,7 @@ function PasswordChangeModal() {
                 </InputBox>
                 <BtnBox>
                     <Button red={false} width={300} text="저장"></Button>
-                    <Button red={true} width={300} text="취소"></Button>
+                    <Button red={true} width={300} text="취소" event={closeModal}></Button>
                 </BtnBox>
             </Body>
         </ModalBackground>

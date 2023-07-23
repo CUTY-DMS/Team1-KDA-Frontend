@@ -11,5 +11,9 @@ export const Modal = () => {
             return null
         case 'password' :
             return <PasswordChangeModal/>
+        case 'birth' :
+            return null;
+        default :
+            return null;
     }
 }

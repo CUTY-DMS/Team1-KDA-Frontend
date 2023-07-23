@@ -4,15 +4,14 @@ import Header from "../components/common/Header";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../components/common/Button";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { modalState } from "../utils/atom/atom";
 
 function MyPage() {
-    const [modal, setModal] = useRecoilState(modalState);
+    const setState = useSetRecoilState(modalState);
 
-    const onClick = () => {
-        setModal("password");
-        console.log(modal);
+    const onModal = (modalName) => {
+        setState('password');
     }
 
     return (
@@ -33,9 +32,9 @@ function MyPage() {
                     </InfoBox>
                 </TopBox>
                 <BtnBox>
-                    <div className="btn" onClick={onClick}>담당학급 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
-                    <div className="btn">생년월일 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
-                    <div className="btn">비밀번호 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn" onClick={() => {onModal('gradeClass')}}>담당학급 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn" onClick={() => {onModal('birth')}}>생년월일 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn" onClick={() => {onModal('password')}}>비밀번호 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
                     <Button red={false} width={300} text="저장"></Button>
                 </BtnBox>
             </Body>
