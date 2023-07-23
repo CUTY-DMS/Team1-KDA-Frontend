@@ -14,7 +14,7 @@ function InformationChangeModal() {
             <Body>
                 <InputBox>
                     <TextField type="text" width={1000} height={50} text="이름" name="name"/>
-                    <TextField type="text" width={1000} height={50} text="생년월일" name="birth"/>
+                    <TextField type="text" width={1000} height={50} text="생년월일 (ex 20001212)" name="birth"/>
                     <GradeClassBox>
                         <TextField type="text" width={480} height={50} text="학년" name="grade"/>
                         <TextField type="text" width={480} height={50} text="반" name="class"/>
