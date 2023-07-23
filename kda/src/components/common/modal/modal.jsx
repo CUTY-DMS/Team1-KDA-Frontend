@@ -2,6 +2,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { modalState } from "../../../utils/atom/atom";
 import PasswordChangeModal from "./passwordChangeModal";
+import InformationChangeModal from "./informationChangeModal";
 
 export const Modal = () => {
     const modal = useRecoilValue(modalState)
@@ -9,10 +10,10 @@ export const Modal = () => {
     switch(modal) {
         case 'none' :
             return null
+        case 'information' :
+            return <InformationChangeModal/>;
         case 'password' :
             return <PasswordChangeModal/>
-        case 'birth' :
-            return null;
         default :
             return null;
     }

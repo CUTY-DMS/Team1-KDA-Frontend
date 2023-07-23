@@ -11,7 +11,7 @@ function MyPage() {
     const setState = useSetRecoilState(modalState);
 
     const onModal = (modalName) => {
-        setState('password');
+        setState(modalName);
     }
 
     return (
@@ -32,12 +32,9 @@ function MyPage() {
                     </InfoBox>
                 </TopBox>
                 <BtnBox>
-                    <div className="btn" onClick={() => {onModal('gradeClass')}}>정보 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
+                    <div className="btn" onClick={() => {onModal('information')}}>정보 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
                     <div className="btn" onClick={() => {onModal('password')}}>비밀번호 변경<span><FontAwesomeIcon icon={faArrowUp} fontSize={50} style={{marginBottom:"5px"}} className="icon"/></span></div>
                 </BtnBox>
-                <BottomBox>
-                    <Button red={false} width={300} text="저장"></Button>
-                </BottomBox>
             </Body>
         </>
     )
@@ -104,7 +101,7 @@ const InfoBox = styled.div`
 
 const BtnBox = styled.div`
     margin-top:20px;
-    width:800px;
+    width:700px;
     display:flex;
     justify-content:space-between;
     .btn {
