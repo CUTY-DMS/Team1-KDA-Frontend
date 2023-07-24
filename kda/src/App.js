@@ -8,9 +8,9 @@ function App() {
   return (
     <RecoilRoot>
       <Suspense fallback={<>Loading...</>}>
-        <Modal/>
-        <Router/>
-        <CustomToastContainer/>
+        <Modal />
+        <Router />
+        <CustomToastContainer />
       </Suspense>
     </RecoilRoot>
   );
