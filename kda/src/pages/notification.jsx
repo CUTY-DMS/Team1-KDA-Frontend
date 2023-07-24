@@ -60,7 +60,7 @@ const Body = styled.div`
 
 const TopBox = styled.div`
   width: 1280px;
-  height: 155px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -69,8 +69,14 @@ const TopBox = styled.div`
     justify-content: space-between;
     width: 320px;
     span {
+      cursor: pointer;
       font-size: 18px;
       color: #7c7c7c;
+      transition: 0.1s ease-in-out;
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
     }
   }
 `;
@@ -97,13 +103,13 @@ const Notification = styled.div`
   flex-direction: column;
   justify-content: center;
   :first-child {
-    margin-left: 100px;
-    font-size: 38px;
+    margin-left: 80px;
+    font-size: 36px;
     font-weight: 400;
   }
   :last-child {
-    margin-left: 100px;
-    font-size: 20px;
+    margin-left: 80px;
+    font-size: 18px;
     font-weight: 100;
     color: #7c7c7c;
   }
