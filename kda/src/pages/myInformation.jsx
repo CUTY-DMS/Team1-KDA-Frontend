@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "../components/common/Button";
 import { useSetRecoilState } from "recoil";
 import { modalState } from "../utils/atom/atom";
 

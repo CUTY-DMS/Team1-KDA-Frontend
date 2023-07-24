@@ -3,17 +3,23 @@ import { useRecoilValue } from "recoil";
 import { modalState } from "../../../utils/atom/atom";
 import PasswordChangeModal from "./passwordChangeModal";
 import InformationChangeModal from "./informationChangeModal";
+import GradeClassChangeModal from "./gradeClassChangeModal";
+import StudentModal from "./studentModal";
 
 export const Modal = () => {
     const modal = useRecoilValue(modalState)
 
     switch(modal) {
         case 'none' :
-            return null
+            return null;
         case 'information' :
             return <InformationChangeModal/>;
         case 'password' :
-            return <PasswordChangeModal/>
+            return <PasswordChangeModal/>;
+        case 'gradeClass' :
+            return <GradeClassChangeModal/>;
+        case 'student' :
+            return <StudentModal/>;
         default :
             return null;
     }
