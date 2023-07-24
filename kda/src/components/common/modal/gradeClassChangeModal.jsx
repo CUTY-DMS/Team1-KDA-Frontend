@@ -33,28 +33,28 @@ function GradeClassChangeModal() {
           </InnerContainer>
         </Container>
         <CloseBtn>
-          <FontAwesomeIcon icon={faXmark} fontSize={30} onClick={closeModal}/>
+          <FontAwesomeIcon icon={faXmark} fontSize={30} onClick={closeModal} />
         </CloseBtn>
       </Body>
     </ModalBackground>
-  )
+  );
 }
 
 export default GradeClassChangeModal;
 
 const Body = styled.div`
-  width:1200px;
-  height:450px;
-  background-color:white;
-  display:flex;
+  width: 1200px;
+  height: 450px;
+  background-color: white;
+  display: flex;
 `;
 
 const Container = styled.div`
-  margin-left:50px;
-  width:1100px;
-  height:450px;
-  display:flex;
-  flex-direction:column;
+  margin-left: 50px;
+  width: 1100px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
   > :nth-child(2) {
     border-top: 1px #609960 solid;
     border-bottom: 1px #609960 solid;
@@ -62,28 +62,28 @@ const Container = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  width:1100px;
-  height:150px;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
+  width: 1100px;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   div {
-    width:100px;
-    height:100px;
-    background-color:#F0F0F0;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    font-weight:100;
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 100;
   }
 `;
 
 const CloseBtn = styled.div`
-  width:50px;
-  margin-top:5px;
-  display:flex;
-  justify-content:end;
-  margin-right:20px;
+  width: 50px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
 `;
