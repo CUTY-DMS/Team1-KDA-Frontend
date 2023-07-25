@@ -34,7 +34,7 @@ function InformationChangeModal() {
         console.log(res);
       })
       .catch((err) => {
-        console.error(err.response.status);
+        console.error(err);
         alert("error");
       });
   };
@@ -67,7 +67,7 @@ function InformationChangeModal() {
               width={480}
               height={50}
               text='학년'
-              name='grade'
+              name='teachGrade'
               value={teachGrade}
               event={onChange}
             />
@@ -76,7 +76,7 @@ function InformationChangeModal() {
               width={480}
               height={50}
               text='반'
-              name='class'
+              name='teachClass'
               value={teachClass}
               event={onChange}
             />
