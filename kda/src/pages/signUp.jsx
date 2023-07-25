@@ -245,6 +245,12 @@ const LinkBox = styled.div`
       opacity: 0.8;
       text-decoration: underline;
     }
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 

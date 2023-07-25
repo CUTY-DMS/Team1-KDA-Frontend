@@ -68,6 +68,12 @@ const BottomText = styled.div`
   display: flex;
   justify-content: space-between;
   span {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     color: #737373;
     font-size: 20px;
     font-weight: 300;

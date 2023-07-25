@@ -15,10 +15,11 @@ function SignInPage() {
   const onClick = () => {
     signInPost(data)
       .then((res) => {
-        console.log(res);
+        const token = res.data.accessToken;
+        localStorage.setItem("accessToken", token);
+        window.location.href = "/main";
       })
       .catch((err) => {
-        console.error(err.response.status);
         alert("error");
       });
   };
@@ -155,6 +156,12 @@ const LinkBox = styled.div`
       text-decoration: underline;
       opacity: 0.8;
     }
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 
@@ -184,6 +191,12 @@ const LinkBox2 = styled.div`
       opacity: 0.8;
       text-decoration: underline;
     }
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 

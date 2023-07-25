@@ -53,11 +53,23 @@ const LeftBox = styled.div`
   img {
     width: 80px;
     height: 80px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   span {
     font-weight: 100;
     font-size: 18px;
     color: #7c7c7c;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 
@@ -82,6 +94,12 @@ const Img = styled.div`
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid black;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const RigthBoxInnerBox = styled.div`
@@ -93,10 +111,22 @@ const RigthBoxInnerBox = styled.div`
   :first-child {
     font-size: 20px;
     font-weight: 100;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   :last-child {
     font-size: 15px;
     font-weight: 100;
     color: #7c7c7c;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
