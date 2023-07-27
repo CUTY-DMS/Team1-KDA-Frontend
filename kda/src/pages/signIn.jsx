@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 import { signInPost } from "../apis/signIn";
+import { customToast } from "../utils/toast/customToast";
 
 function SignInPage() {
   const [data, setData] = useState({
@@ -15,12 +16,14 @@ function SignInPage() {
   const onClick = () => {
     signInPost(data)
       .then((res) => {
-        const token = res.data.accessToken;
-        localStorage.setItem("accessToken", token);
-        window.location.href = "/main";
+        const atoken = res.data.accessToken;
+        const rtoken = res.data.refreshToken;
+        localStorage.setItem("accessToken", atoken);
+        localStorage.setItem("refreshToken", rtoken);
+        //window.location.href = "/main";
       })
       .catch((err) => {
-        alert("error");
+        customToast("이메일 혹은 비밀번호를 확인해주세요", "error");
       });
   };
 
@@ -88,6 +91,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 
 const Img = styled.div`
