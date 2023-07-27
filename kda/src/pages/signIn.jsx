@@ -20,7 +20,7 @@ function SignInPage() {
         const rtoken = res.data.refreshToken;
         localStorage.setItem("accessToken", atoken);
         localStorage.setItem("refreshToken", rtoken);
-        //window.location.href = "/main";
+        window.location.href = "/main";
       })
       .catch((err) => {
         customToast("이메일 혹은 비밀번호를 확인해주세요", "error");
