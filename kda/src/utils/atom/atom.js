@@ -9,3 +9,11 @@ export const studentEmail = atom({
   key: "studentEmail",
   default: "none",
 });
+
+export const gradeClass = atom({
+  key: "gradeClass",
+  default: {
+    grade: "1",
+    class: "1",
+  },
+});
