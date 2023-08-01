@@ -10,8 +10,8 @@ export const studentEmail = atom({
   default: "none",
 });
 
-export const gradeClass = atom({
-  key: "gradeClass",
+export const gradeClassState = atom({
+  key: "gradeClassState",
   default: {
     grade: "1",
     class: "1",
