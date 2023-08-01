@@ -157,7 +157,6 @@ const LinkBox = styled.div`
     cursor: pointer;
     transition: 0.1s ease-in-out;
     &:hover {
-      text-decoration: underline;
       opacity: 0.8;
     }
     -webkit-touch-callout: none;

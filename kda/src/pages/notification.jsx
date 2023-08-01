@@ -74,7 +74,6 @@ const TopBox = styled.div`
       color: #7c7c7c;
       transition: 0.1s ease-in-out;
       &:hover {
-        text-decoration: underline;
         opacity: 0.8;
       }
     }
