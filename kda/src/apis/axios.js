@@ -5,6 +5,13 @@ const instance = axios.create({
   timeout: 2000,
 });
 
-instance.interceptors.response.use(refresh());
+instance.interceptors.response.use(
+  function (res) {
+    return res;
+  },
+  function (err) {
+    refresh();
+  }
+);
 
 export default instance;
