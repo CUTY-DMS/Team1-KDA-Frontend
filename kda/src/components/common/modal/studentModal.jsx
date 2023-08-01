@@ -6,6 +6,7 @@ import { modalState, studentEmail } from "../../../utils/atom/atom";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { viewStudentDetail } from "../../../apis/viewStudentDetail";
+import { customToast } from "../../../utils/toast/customToast";
 
 function StudentModal() {
   const closeModal = useResetRecoilState(modalState);
@@ -20,8 +21,7 @@ function StudentModal() {
         console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
-        alert("error");
+        window.location.reload();
       });
   }, []);
 
