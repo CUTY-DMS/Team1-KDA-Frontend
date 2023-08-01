@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { viewStudent } from "../apis/viewStudent";
-import { useSetRecoilState } from "recoil";
-import { modalState, studentEmail } from "../utils/atom/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { gradeClassState, modalState, studentEmail } from "../utils/atom/atom";
 
 function StudentPage() {
   const [students, setStudents] = useState();
@@ -12,6 +12,7 @@ function StudentPage() {
 
   const setModal = useSetRecoilState(modalState);
   const setEmail = useSetRecoilState(studentEmail);
+  const viewGradeClass = useRecoilValue(gradeClassState);
 
   useEffect(() => {
     viewStudent(accessToken)
@@ -39,27 +40,31 @@ function StudentPage() {
       <Body>
         <ListContainer>
           {students ? (
-            students.map((student) => (
-              <ListContent>
-                <Img>
-                  <img src='' />
-                </Img>
-                <TextBox>
-                  <span>
-                    {student.grade}
-                    {student.classes}
-                    {student.number.toString().padStart(2, "0")}&nbsp;
-                    {student.name}
-                  </span>
-                  <span
-                    onClick={() => {
-                      onDetailModal(student.email, "student");
-                    }}>
-                    더보기
-                  </span>
-                </TextBox>
-              </ListContent>
-            ))
+            students.map((student) =>
+              student.grade == viewGradeClass.grade ? (
+                student.classes == viewGradeClass.class ? (
+                  <ListContent>
+                    <Img>
+                      <img src='' />
+                    </Img>
+                    <TextBox>
+                      <span>
+                        {student.grade}
+                        {student.classes}
+                        {student.number.toString().padStart(2, "0")}&nbsp;
+                        {student.name}
+                      </span>
+                      <span
+                        onClick={() => {
+                          onDetailModal(student.email, "student");
+                        }}>
+                        더보기
+                      </span>
+                    </TextBox>
+                  </ListContent>
+                ) : null
+              ) : null
+            )
           ) : (
             <>roading..</>
           )}
@@ -69,7 +74,7 @@ function StudentPage() {
         onClick={() => {
           onGradeClassChangeModal("gradeClass");
         }}>
-        1 - 1
+        {viewGradeClass.grade} - {viewGradeClass.class}
       </GradeClassChangeButton>
     </>
   );
