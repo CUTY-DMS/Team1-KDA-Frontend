@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { useRecoilState } from "recoil";
-import { myInfoState } from "../utils/atom/";
+import { myInfoState } from "../utils/atom/atom";
 
 function MainPage() {
   const [date, setDate] = useState(() => new Date());
