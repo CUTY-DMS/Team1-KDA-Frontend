@@ -3,11 +3,13 @@ import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { myInfoState } from "../utils/atom/atom";
 import { modalState } from "../utils/atom/atom";
 
 function MyPage() {
   const setState = useSetRecoilState(modalState);
+  const [data, setData] = useRecoilState(myInfoState);
 
   const onModal = (modalName) => {
     setState(modalName);
@@ -16,58 +18,67 @@ function MyPage() {
   return (
     <>
       <Header />
-      <Body>
-        <TopBox>
-          <Profile>
-            <img src='' />
-          </Profile>
-          <NameBox>
-            <span>최수장</span>
-            <span
-              onClick={() => {
-                onModal("logout");
-              }}>
-              로그아웃
-            </span>
-          </NameBox>
-          <InfoBox>
-            <span>담당 : 1 - 2</span>
-            <span>2000 - 05 - 19</span>
-          </InfoBox>
-        </TopBox>
-        <BtnBox>
-          <div
-            className='btn'
-            onClick={() => {
-              onModal("information");
-            }}>
-            정보 변경
-            <span>
-              <FontAwesomeIcon
-                icon={faArrowUp}
-                fontSize={50}
-                style={{ marginBottom: "5px" }}
-                className='icon'
-              />
-            </span>
-          </div>
-          <div
-            className='btn'
-            onClick={() => {
-              onModal("password");
-            }}>
-            비밀번호 변경
-            <span>
-              <FontAwesomeIcon
-                icon={faArrowUp}
-                fontSize={50}
-                style={{ marginBottom: "5px" }}
-                className='icon'
-              />
-            </span>
-          </div>
-        </BtnBox>
-      </Body>
+      {data ? (
+        <>
+          <Body>
+            <TopBox>
+              <Profile>
+                <img src='' />
+              </Profile>
+              <NameBox>
+                <span>{data.name}</span>
+                <span
+                  onClick={() => {
+                    onModal("logout");
+                  }}>
+                  로그아웃
+                </span>
+              </NameBox>
+              <InfoBox>
+                <span>
+                  담당 : {data.teachGrade} - {data.teachClass}
+                </span>
+                <span>생일 : {data.birth}</span>
+                <span>메일 : {data.email}</span>
+              </InfoBox>
+            </TopBox>
+            <BtnBox>
+              <div
+                className='btn'
+                onClick={() => {
+                  onModal("information");
+                }}>
+                정보 변경
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    fontSize={50}
+                    style={{ marginBottom: "5px" }}
+                    className='icon'
+                  />
+                </span>
+              </div>
+              <div
+                className='btn'
+                onClick={() => {
+                  onModal("password");
+                }}>
+                비밀번호 변경
+                <span>
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    fontSize={50}
+                    style={{ marginBottom: "5px" }}
+                    className='icon'
+                  />
+                </span>
+              </div>
+            </BtnBox>
+          </Body>
+        </>
+      ) : (
+        <ErrorMsg>로딩중...</ErrorMsg>
+      )}
     </>
   );
 }
@@ -80,10 +91,19 @@ const Body = styled.div`
   align-items: center;
 `;
 
+const ErrorMsg = styled.div`
+  width: 100%;
+  margin-top: 20vh;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  margin-left: 50px;
+`;
+
 const TopBox = styled.div`
   width: 1420px;
-  height: 150px;
-  margin-top: 70px;
+  height: 200px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
 `;
@@ -123,7 +143,7 @@ const InfoBox = styled.div`
   margin-left: 30px;
   display: flex;
   flex-direction: column;
-  width: 120px;
+  width: 200px;
   span {
     font-weight: 300;
     font-size: 18px;
