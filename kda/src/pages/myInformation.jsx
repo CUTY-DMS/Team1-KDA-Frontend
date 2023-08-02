@@ -23,7 +23,12 @@ function MyPage() {
           </Profile>
           <NameBox>
             <span>최수장</span>
-            <span>로그아웃</span>
+            <span
+              onClick={() => {
+                onModal("logout");
+              }}>
+              로그아웃
+            </span>
           </NameBox>
           <InfoBox>
             <span>담당 : 1 - 2</span>
