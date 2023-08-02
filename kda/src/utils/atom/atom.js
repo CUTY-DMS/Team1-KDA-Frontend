@@ -17,3 +17,8 @@ export const gradeClassState = atom({
     class: "1",
   },
 });
+
+export const myInfoState = atom({
+  key: "myInfoState",
+  default: null,
+});

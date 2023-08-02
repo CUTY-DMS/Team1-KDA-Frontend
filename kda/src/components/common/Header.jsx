@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { myInfo } from "../../apis/myInfo";
+import { useRecoilState } from "recoil";
+import { myInfoState } from "../../utils/atom/atom";
 
 function Header() {
+  const [data, setData] = useRecoilState(myInfoState);
+  const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+
+  useEffect(() => {
+    myInfo(accessToken)
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Body>
       <Wrapper>
@@ -17,7 +34,13 @@ function Header() {
             <img src='' />
           </Img>
           <RigthBoxInnerBox>
-            <span>1-2 최수장</span>
+            {data ? (
+              <span>
+                {data.teachGrade}-{data.teachClass} {data.name}
+              </span>
+            ) : (
+              <span>로딩중...</span>
+            )}
             <span>&lt; 마이페이지</span>
           </RigthBoxInnerBox>
           <div className='line'></div>
