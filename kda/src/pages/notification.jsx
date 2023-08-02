@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { allNoti } from "../apis/allNotification";
+import timeSplit from "../utils/func/timeSplit";
+import dateSplit from "../utils/func/dateSplit";
 
 function NotificationPage() {
+  const [notis, setNotis] = useState([]);
+  const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+
+  useEffect(() => {
+    allNoti(accessToken)
+      .then((res) => {
+        setNotis(res.data.reverse());
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -17,30 +34,19 @@ function NotificationPage() {
           </div>
         </TopBox>
         <NotificationContainer>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
-          <Notification>
-            <span>대충 들어가야할 부분</span>
-            <span>2022.08.22 오전 12:48 - 최수장 T</span>
-          </Notification>
+          {notis ? (
+            notis.map((element) => (
+              <Notification key={element.id}>
+                <span>{element.title}</span>
+                <span>
+                  {dateSplit(element.dateTime)} - {timeSplit(element.dateTime)}{" "}
+                  - {element.name} T
+                </span>
+              </Notification>
+            ))
+          ) : (
+            <>Loading...</>
+          )}
         </NotificationContainer>
         <AddBtn>
           <FontAwesomeIcon icon={faXmark} fontSize={50} />
@@ -93,6 +99,7 @@ const NotificationContainer = styled.div`
 `;
 
 const Notification = styled.div`
+  cursor: pointer;
   margin-top: 25px;
   width: 1280px;
   height: 150px;
@@ -101,6 +108,7 @@ const Notification = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: 0.05s ease-in-out;
   :first-child {
     margin-left: 80px;
     font-size: 36px;
@@ -111,6 +119,12 @@ const Notification = styled.div`
     font-size: 18px;
     font-weight: 100;
     color: #7c7c7c;
+  }
+  &:hover {
+    transform: scale(1.01);
+  }
+  &:active {
+    transform: scale(0.99);
   }
 `;
 
