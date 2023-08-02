@@ -10,7 +10,9 @@ instance.interceptors.response.use(
     return res;
   },
   function (err) {
-    refresh();
+    refresh().catch((err) => {
+      window.location = "/";
+    });
   }
 );
 
