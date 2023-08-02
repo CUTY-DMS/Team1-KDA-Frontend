@@ -84,8 +84,8 @@ const TopBox = styled.div`
 `;
 
 const Profile = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid black;
@@ -108,8 +108,7 @@ const NameBox = styled.div`
     cursor: pointer;
     transition: 0.1s ease-in-out;
     &:hover {
-      text-decoration: underline;
-      opacity: 0.8;
+      color: #c00000;
     }
   }
 `;
