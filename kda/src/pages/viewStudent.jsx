@@ -40,33 +40,37 @@ function StudentPage() {
       <Body>
         <ListContainer>
           {students ? (
-            students.map((student) =>
-              student.grade == viewGradeClass.grade ? (
-                student.classes == viewGradeClass.class ? (
-                  <ListContent>
-                    <Img>
-                      <img src='' />
-                    </Img>
-                    <TextBox>
-                      <span>
-                        {student.grade}
-                        {student.classes}
-                        {student.number.toString().padStart(2, "0")}&nbsp;
-                        {student.name}
-                      </span>
-                      <span
-                        onClick={() => {
-                          onDetailModal(student.email, "student");
-                        }}>
-                        더보기
-                      </span>
-                    </TextBox>
-                  </ListContent>
+            students.length > 0 ? (
+              students.map((student) =>
+                student.grade == viewGradeClass.grade ? (
+                  student.classes == viewGradeClass.class ? (
+                    <ListContent>
+                      <Img>
+                        <img src='' />
+                      </Img>
+                      <TextBox>
+                        <span>
+                          {student.grade}
+                          {student.classes}
+                          {student.number.toString().padStart(2, "0")}&nbsp;
+                          {student.name}
+                        </span>
+                        <span
+                          onClick={() => {
+                            onDetailModal(student.email, "student");
+                          }}>
+                          더보기
+                        </span>
+                      </TextBox>
+                    </ListContent>
+                  ) : null
                 ) : null
-              ) : null
+              )
+            ) : (
+              <ErrorMsg>학생 정보가 없습니다</ErrorMsg>
             )
           ) : (
-            <>roading..</>
+            <ErrorMsg>로딩중...</ErrorMsg>
           )}
         </ListContainer>
       </Body>
@@ -81,6 +85,15 @@ function StudentPage() {
 }
 
 export default StudentPage;
+
+const ErrorMsg = styled.div`
+  width: 100%;
+  margin-top: 20vh;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  margin-left: 50px;
+`;
 
 const Body = styled.div`
   display: flex;
