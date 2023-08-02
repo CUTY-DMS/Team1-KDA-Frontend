@@ -8,7 +8,7 @@ import timeSplit from "../utils/func/timeSplit";
 import dateSplit from "../utils/func/dateSplit";
 
 function NotificationPage() {
-  const [notis, setNotis] = useState([]);
+  const [notis, setNotis] = useState();
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
 
   useEffect(() => {
@@ -21,6 +21,10 @@ function NotificationPage() {
         console.log(err);
       });
   }, []);
+
+  const onClick = (id) => {
+    window.location.href = `/notification/${id}`;
+  };
 
   return (
     <>
@@ -36,7 +40,9 @@ function NotificationPage() {
         <NotificationContainer>
           {notis ? (
             notis.map((element) => (
-              <Notification key={element.id}>
+              <Notification
+                key={element.id}
+                onClick={() => onClick(element.id)}>
                 <span>{element.title}</span>
                 <span>
                   {dateSplit(element.dateTime)} - {timeSplit(element.dateTime)}{" "}
@@ -45,7 +51,7 @@ function NotificationPage() {
               </Notification>
             ))
           ) : (
-            <>Loading...</>
+            <ErrorMsg>로딩중....</ErrorMsg>
           )}
         </NotificationContainer>
         <AddBtn>
@@ -62,6 +68,13 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const ErrorMsg = styled.div`
+  margin-top: 20vh;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
 `;
 
 const TopBox = styled.div`

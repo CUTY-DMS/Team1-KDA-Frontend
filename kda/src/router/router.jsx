@@ -14,24 +14,30 @@ import NotificationDetailPage from "../pages/notificationDetail";
 import CalenderPage from "../pages/calender";
 
 export const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<LandingPage/>} />
-                <Route path="/signIn" element={<SignInPage/>} />
-                <Route path="/signUp" element={<SignUpPage/>} />
-                <Route path="/findPassword" element={<FindPassword/>} />
-                <Route path="/main" element={<MainPage/>} />
-                <Route path="/myInformation" element={<MyPage/>} />
-                <Route path="/student" element={<StudentPage/>} />
-                <Route path="/notification" element={<NotificationPage/>} />
-                <Route path="/notificationCreate" element={<NotificationCreatePage/>} />
-                <Route path="/notificationModify" element={<NotificationModifyPage/>} />
-                <Route path="/notificationDetail" element={<NotificationDetailPage/>} />
-                <Route path="/calender" element={<CalenderPage/>} />
-                <Route path="/test" element={<LoadingPage/>} />
-                <Route path="*" element={<>올바르지 않은 경로입니다!</>} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/signIn' element={<SignInPage />} />
+        <Route path='/signUp' element={<SignUpPage />} />
+        <Route path='/findPassword' element={<FindPassword />} />
+        <Route path='/main' element={<MainPage />} />
+        <Route path='/myInformation' element={<MyPage />} />
+        <Route path='/student' element={<StudentPage />} />
+        <Route path='/notification' element={<NotificationPage />} />
+        <Route
+          path='/notificationCreate'
+          element={<NotificationCreatePage />}
+        />
+        <Route
+          path='/notificationModify'
+          element={<NotificationModifyPage />}
+        />
+        <Route path='/notification/:id' element={<NotificationDetailPage />} />
+        <Route path='/calender' element={<CalenderPage />} />
+        <Route path='/test' element={<LoadingPage />} />
+        <Route path='*' element={<>올바르지 않은 경로입니다!</>} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
