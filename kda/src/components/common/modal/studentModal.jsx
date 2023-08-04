@@ -163,6 +163,7 @@ const Line = styled.div`
 `;
 
 const CloseBtn = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: end;
   margin-right: 20px;

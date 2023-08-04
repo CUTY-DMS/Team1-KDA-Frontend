@@ -201,6 +201,7 @@ const Btn = styled.div`
 `;
 
 const CloseBtn = styled.div`
+  cursor: pointer;
   width: 50px;
   margin-top: 5px;
   display: flex;
