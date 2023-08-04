@@ -26,6 +26,10 @@ function NotificationPage() {
     window.location.href = `/notification/${id}`;
   };
 
+  const onCreate = (id) => {
+    window.location.href = `/notificationCreate`;
+  };
+
   return (
     <>
       <Header />
@@ -38,9 +42,9 @@ function NotificationPage() {
           </div>
         </TopBox>
         <NotificationContainer>
-          {notis.length > 0 ? (
+          {notis ? (
             <>
-              {notis ? (
+              {notis.length > 0 ? (
                 notis.map((element) => (
                   <Notification
                     key={element.id}
@@ -53,14 +57,14 @@ function NotificationPage() {
                   </Notification>
                 ))
               ) : (
-                <ErrorMsg>로딩중....</ErrorMsg>
+                <ErrorMsg>공지가 없습니다</ErrorMsg>
               )}
             </>
           ) : (
-            <ErrorMsg>공지가 없습니다</ErrorMsg>
+            <ErrorMsg>로딩중....</ErrorMsg>
           )}
         </NotificationContainer>
-        <AddBtn>
+        <AddBtn onClick={onCreate}>
           <FontAwesomeIcon icon={faXmark} fontSize={50} />
         </AddBtn>
       </Body>
