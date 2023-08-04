@@ -4,17 +4,23 @@ import Header from "../components/common/Header";
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 import { notificationCreate } from "../apis/notificationCreate";
+import { customToast } from "../utils/toast/customToast";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { gradeClassState, modalState } from "../utils/atom/atom";
 
 function NotificationCreatePage() {
+  const viewGradeClass = useRecoilValue(gradeClassState);
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
   const [select, setSelect] = useState("ALL");
   const [data, setData] = useState({
     title: "",
     noti: select,
     contents: "",
-    classes: "1",
-    grade: "1",
+    classes: 1,
+    grade: 1,
   });
+
+  const setModal = useSetRecoilState(modalState);
 
   const { title, contents } = data;
 
@@ -27,6 +33,13 @@ function NotificationCreatePage() {
   };
 
   const onSubmit = () => {
+    if (data.title === "") {
+      customToast("제목을 작성해주세요", "error");
+      return;
+    } else if (data.contents === "") {
+      customToast("내용을 작성해주세요", "error");
+      return;
+    }
     notificationCreate(data, accessToken)
       .then((res) => {
         window.location.href = "/notification";
@@ -39,8 +52,19 @@ function NotificationCreatePage() {
 
   const onClick = (kind) => {
     setSelect(kind);
-    console.log(select);
+    setData({
+      ...data,
+      noti: kind,
+    });
   };
+
+  useEffect(() => {
+    setData({
+      ...data,
+      grade: viewGradeClass.grade,
+      classes: viewGradeClass.class,
+    });
+  }, [viewGradeClass]);
 
   return (
     <>
@@ -65,10 +89,11 @@ function NotificationCreatePage() {
           <Btn
             onClick={() => {
               onClick("CLASS");
+              setModal("gradeClass");
             }}
             selected={select}
             kind='CLASS'>
-            1 - 1
+            {viewGradeClass.grade} - {viewGradeClass.class}
           </Btn>
           <Btn
             onClick={() => {

@@ -38,7 +38,7 @@ function NotificationPage() {
           <div>
             <span>1 - 1 공지</span>
             <span>전체 공지</span>
-            <span>교사 공지</span>
+            <span>교직원 공지</span>
           </div>
         </TopBox>
         <NotificationContainer>

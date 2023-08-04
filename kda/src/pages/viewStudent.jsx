@@ -78,7 +78,13 @@ function StudentPage() {
         onClick={() => {
           onGradeClassChangeModal("gradeClass");
         }}>
-        {viewGradeClass.grade} - {viewGradeClass.class}
+        {viewGradeClass ? (
+          <>
+            {viewGradeClass.grade} - {viewGradeClass.class}
+          </>
+        ) : (
+          <ErrorMsg>로딩중...</ErrorMsg>
+        )}
       </GradeClassChangeButton>
     </>
   );
