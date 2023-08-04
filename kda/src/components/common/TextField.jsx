@@ -75,6 +75,7 @@ export default TextField;
 const Wrapper = styled.div`
   width: ${({ width }) => (width ? `${width}px` : "100px")};
   height: ${({ height }) => (height ? `${height}px` : "100px")};
+  position: relative;
 `;
 
 const Input = styled.input`
@@ -98,14 +99,19 @@ const Label = styled.label`
   transition: 0.2s ease-in-out;
   bottom: ${({ upText }) => (upText ? "60px" : "34px")};
   left: ${({ upText }) => (upText ? "13px" : "10px")};
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const Eye = styled.label`
   cursor: pointer;
-  position: relative;
+  position: absolute;
   margin: 0;
   transition: 0.2s ease-in-out;
-  bottom: ${({ upText }) => (upText ? "30px" : "34px")};
-  left: ${({ upText, width }) =>
-    upText ? `${width - 94}px` : `${width - 110}px`};
+  bottom: 22px;
+  right: 5px;
 `;
