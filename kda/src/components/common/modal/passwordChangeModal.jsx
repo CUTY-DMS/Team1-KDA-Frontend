@@ -29,7 +29,7 @@ function PasswordChangeModal() {
   const onSubmit = () => {
     passwordModify(data)
       .then((res) => {
-        console.log(res);
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err.response.status);

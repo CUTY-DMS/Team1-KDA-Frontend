@@ -38,20 +38,26 @@ function NotificationPage() {
           </div>
         </TopBox>
         <NotificationContainer>
-          {notis ? (
-            notis.map((element) => (
-              <Notification
-                key={element.id}
-                onClick={() => onClick(element.id)}>
-                <span>{element.title}</span>
-                <span>
-                  {dateSplit(element.dateTime)} - {timeSplit(element.dateTime)}{" "}
-                  - {element.name} T
-                </span>
-              </Notification>
-            ))
+          {notis.length > 0 ? (
+            <>
+              {notis ? (
+                notis.map((element) => (
+                  <Notification
+                    key={element.id}
+                    onClick={() => onClick(element.id)}>
+                    <span>{element.title}</span>
+                    <span>
+                      {dateSplit(element.dateTime)} -{" "}
+                      {timeSplit(element.dateTime)} - {element.name} T
+                    </span>
+                  </Notification>
+                ))
+              ) : (
+                <ErrorMsg>로딩중....</ErrorMsg>
+              )}
+            </>
           ) : (
-            <ErrorMsg>로딩중....</ErrorMsg>
+            <ErrorMsg>공지가 없습니다</ErrorMsg>
           )}
         </NotificationContainer>
         <AddBtn>
