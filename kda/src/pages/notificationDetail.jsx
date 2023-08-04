@@ -6,12 +6,18 @@ import { detailNoti } from "../apis/detialNotification";
 import timeSplit from "../utils/func/timeSplit";
 import dateSplit from "../utils/func/dateSplit";
 import contentSplit from "../utils/func/contentSplit";
+import { faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function NotificationDetailPage() {
   const { id } = useParams();
 
   const [notis, setNotis] = useState();
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+
+  const onExit = () => {
+    window.location.href = `/notification`;
+  };
 
   useEffect(() => {
     detailNoti(accessToken, id)
@@ -55,6 +61,9 @@ function NotificationDetailPage() {
         ) : (
           <ErrorMsg>로딩중....</ErrorMsg>
         )}
+        <ExitBtn onClick={onExit}>
+          <FontAwesomeIcon icon={faArrowRotateLeft} fontSize={50} />
+        </ExitBtn>
       </Body>
     </>
   );
@@ -121,4 +130,24 @@ const ContentBox = styled.div`
   width: 1600px;
   font-size: 20px;
   font-weight: 350;
+`;
+
+const ExitBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  position: fixed;
+  left: 70px;
+  bottom: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #609960;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.2) rotate(-360deg);
+    opacity: 0.8;
+  }
 `;

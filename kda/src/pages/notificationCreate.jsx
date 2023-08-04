@@ -7,6 +7,8 @@ import { notificationCreate } from "../apis/notificationCreate";
 import { customToast } from "../utils/toast/customToast";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { gradeClassState, modalState } from "../utils/atom/atom";
+import { faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function NotificationCreatePage() {
   const viewGradeClass = useRecoilValue(gradeClassState);
@@ -56,6 +58,10 @@ function NotificationCreatePage() {
       ...data,
       noti: kind,
     });
+  };
+
+  const onExit = () => {
+    window.location.href = `/notification`;
   };
 
   useEffect(() => {
@@ -119,6 +125,9 @@ function NotificationCreatePage() {
             text='공지작성'
             event={onSubmit}></Button>
         </BottomBox>
+        <ExitBtn onClick={onExit}>
+          <FontAwesomeIcon icon={faArrowRotateLeft} fontSize={50} />
+        </ExitBtn>
       </Body>
     </>
   );
@@ -199,5 +208,25 @@ const Btn = styled.div`
   &:active {
     background-color: #609966;
     transition: 0s;
+  }
+`;
+
+const ExitBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  position: fixed;
+  left: 70px;
+  bottom: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #609960;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.2) rotate(-360deg);
+    opacity: 0.8;
   }
 `;
