@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 
 function TextField({ width, height, text, type, name, value, event }) {
   const [upText, setFocus] = useState(false);
+  const input = useRef();
 
   const onFocus = () => {
     setFocus(true);
   };
 
   const onBlur = (e) => {
-    if (e.target.value === "") setFocus(false);
+    if (input.current.value === "") setFocus(false);
   };
+
+  useEffect(() => {
+    if (input.current.value !== "") setFocus(true);
+  });
 
   return (
     <Wrapper width={width} height={height}>
       <Input
+        ref={input}
         type={type}
         width={width}
         height={height}
