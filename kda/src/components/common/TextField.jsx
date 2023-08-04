@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TextField({ width, height, text, type, name, value, event }) {
   const [upText, setFocus] = useState(false);
+  const [canSee, setSee] = useState(false);
   const input = useRef();
 
   const onFocus = () => {
@@ -13,6 +16,21 @@ function TextField({ width, height, text, type, name, value, event }) {
     if (input.current.value === "") setFocus(false);
   };
 
+  const onClick = () => {
+    setSee(!canSee);
+  };
+
+  const isType = () => {
+    if (type == "password") {
+      if (canSee === true) {
+        return "text";
+      } else {
+        return "password";
+      }
+    }
+    return type;
+  };
+
   useEffect(() => {
     if (input.current.value !== "") setFocus(true);
   }, []);
@@ -21,7 +39,7 @@ function TextField({ width, height, text, type, name, value, event }) {
     <Wrapper width={width} height={height}>
       <Input
         ref={input}
-        type={type}
+        type={isType()}
         width={width}
         height={height}
         value={value}
@@ -33,6 +51,21 @@ function TextField({ width, height, text, type, name, value, event }) {
         className={type === "password" ? "password" : ""}
       />
       <Label upText={upText}>{text}</Label>
+      {type === "password" ? (
+        <>
+          {canSee ? (
+            <Eye width={width} upText={upText} onClick={onClick}>
+              <FontAwesomeIcon
+                icon={faEyeSlash}
+                fontSize={20}></FontAwesomeIcon>
+            </Eye>
+          ) : (
+            <Eye width={width} upText={upText} onClick={onClick}>
+              <FontAwesomeIcon icon={faEye} fontSize={20}></FontAwesomeIcon>
+            </Eye>
+          )}
+        </>
+      ) : null}
     </Wrapper>
   );
 }
@@ -56,19 +89,23 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
+  position: relative;
   font-size: ${({ upText }) => (upText ? "16px" : "20px")};
   color: ${({ upText }) => (upText ? "#7C7C7C" : "black")};
   font-weight: 100;
   pointer-events: none;
   cursor: none;
-  position: relative;
   transition: 0.2s ease-in-out;
   bottom: ${({ upText }) => (upText ? "60px" : "34px")};
   left: ${({ upText }) => (upText ? "13px" : "10px")};
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+`;
+
+const Eye = styled.label`
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  transition: 0.2s ease-in-out;
+  bottom: ${({ upText }) => (upText ? "30px" : "34px")};
+  left: ${({ upText, width }) =>
+    upText ? `${width - 94}px` : `${width - 110}px`};
 `;
