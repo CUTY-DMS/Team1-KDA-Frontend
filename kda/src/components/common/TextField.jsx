@@ -15,7 +15,7 @@ function TextField({ width, height, text, type, name, value, event }) {
 
   useEffect(() => {
     if (input.current.value !== "") setFocus(true);
-  });
+  }, []);
 
   return (
     <Wrapper width={width} height={height}>
