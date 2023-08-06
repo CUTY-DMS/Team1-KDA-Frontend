@@ -8,6 +8,9 @@ function Header() {
   const [data, setData] = useRecoilState(myInfoState);
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
 
+  const pathSplit = window.location.href.split("/");
+  const path = pathSplit[3];
+
   useEffect(() => {
     myInfo(accessToken)
       .then((res) => {
@@ -19,15 +22,44 @@ function Header() {
       });
   }, []);
 
+  const onHref = (where) => {
+    window.location.href = `/${where}`;
+  };
+
   return (
     <Body>
       <Wrapper>
         <LeftBox>
-          <img src='/images/signpagelogo.svg' />
-          <span>학생보기</span>
-          <span>공지</span>
-          <span>우리반 캘린더</span>
-          <span>시간표</span>
+          <img
+            src='/images/signpagelogo.svg'
+            onClick={() => onHref("main")}
+            path={path}
+            this={"main"}
+          />
+          <LeftBoxText
+            onClick={() => onHref("student")}
+            path={path}
+            this={"student"}>
+            학생보기
+          </LeftBoxText>
+          <LeftBoxText
+            onClick={() => onHref("notification")}
+            path={path}
+            this={"notification"}>
+            공지
+          </LeftBoxText>
+          <LeftBoxText
+            onClick={() => onHref("calender")}
+            path={path}
+            this={"calender"}>
+            일정
+          </LeftBoxText>
+          <LeftBoxText
+            onClick={() => onHref("schedule")}
+            path={path}
+            this={"schedule"}>
+            시간표
+          </LeftBoxText>
         </LeftBox>
         <RightBox>
           <Img>
@@ -41,7 +73,7 @@ function Header() {
             ) : (
               <span>로딩중...</span>
             )}
-            <span>&lt; 마이페이지</span>
+            <span onClick={() => onHref("myInformation")}>&lt; 마이페이지</span>
           </RigthBoxInnerBox>
           <div className='line'></div>
         </RightBox>
@@ -74,6 +106,7 @@ const LeftBox = styled.div`
   justify-content: space-between;
   align-items: center;
   img {
+    cursor: pointer;
     width: 80px;
     height: 80px;
     -webkit-touch-callout: none;
@@ -83,16 +116,23 @@ const LeftBox = styled.div`
     -ms-user-select: none;
     user-select: none;
   }
-  span {
-    font-weight: 100;
-    font-size: 18px;
-    color: #7c7c7c;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+`;
+
+const LeftBoxText = styled.span`
+  cursor: pointer;
+  color: #7c7c7c;
+  font-weight: ${(prop) => (prop.path === prop.this ? "700" : "100")};
+  font-size: 18px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: 0.2s ease-in-out;
+  opacity: ${(prop) => (prop.path === prop.this ? "1" : "0.8")};
+  &:hover {
+    opacity: 1;
   }
 `;
 
@@ -142,6 +182,7 @@ const RigthBoxInnerBox = styled.div`
     user-select: none;
   }
   :last-child {
+    cursor: pointer;
     font-size: 15px;
     font-weight: 100;
     color: #7c7c7c;
