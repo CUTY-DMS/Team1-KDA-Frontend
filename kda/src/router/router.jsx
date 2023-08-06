@@ -12,6 +12,7 @@ import NotificationCreatePage from "../pages/notificationCreate";
 import NotificationModifyPage from "../pages/notificationModify";
 import NotificationDetailPage from "../pages/notificationDetail";
 import CalenderPage from "../pages/calender";
+import Schedule from "../pages/schedule";
 
 export const Router = () => {
   return (
@@ -36,6 +37,7 @@ export const Router = () => {
         <Route path='/notification/:id' element={<NotificationDetailPage />} />
         <Route path='/calender' element={<CalenderPage />} />
         <Route path='/test' element={<LoadingPage />} />
+        <Route path='/schedule' element={<Schedule />} />
         <Route path='*' element={<>올바르지 않은 경로입니다!</>} />
       </Routes>
     </BrowserRouter>
