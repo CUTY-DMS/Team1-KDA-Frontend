@@ -4,15 +4,47 @@ import Header from "../components/common/Header";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { allNoti } from "../apis/allNotification";
+import { teachNoti } from "../apis/teacherNotification";
 import timeSplit from "../utils/func/timeSplit";
 import dateSplit from "../utils/func/dateSplit";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { modalState } from "../utils/atom/atom";
+import { gradeClassState } from "../utils/atom/atom";
+import { classNoti } from "../apis/classNotification";
 
 function NotificationPage() {
   const [notis, setNotis] = useState();
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+  const [select, setSelect] = useState("ALL");
+
+  const viewGradeClass = useRecoilValue(gradeClassState);
+  const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
-    allNoti(accessToken)
+    if (select == "ALL") {
+      allNoti(accessToken)
+        .then((res) => {
+          setNotis(res.data.reverse());
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (select == "TEACHER") {
+      teachNoti(accessToken)
+        .then((res) => {
+          setNotis(res.data.reverse());
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [select]);
+
+  useEffect(() => {
+    console.log(1234);
+    classNoti(accessToken, viewGradeClass.grade, viewGradeClass.class)
       .then((res) => {
         setNotis(res.data.reverse());
         console.log(res.data);
@@ -20,7 +52,7 @@ function NotificationPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [viewGradeClass]);
 
   const onClick = (id) => {
     window.location.href = `/notification/${id}`;
@@ -36,9 +68,31 @@ function NotificationPage() {
       <Body>
         <TopBox>
           <div>
-            <span>1 - 1 공지</span>
-            <span>전체 공지</span>
-            <span>교직원 공지</span>
+            <Btn
+              onClick={() => {
+                setModal("gradeClass");
+                setSelect("CLASS");
+              }}
+              kind='CLASS'
+              selected={select}>
+              {viewGradeClass.grade} - {viewGradeClass.class} 공지
+            </Btn>
+            <Btn
+              onClick={() => {
+                setSelect("ALL");
+              }}
+              kind='ALL'
+              selected={select}>
+              전체 공지
+            </Btn>
+            <Btn
+              onClick={() => {
+                setSelect("TEACHER");
+              }}
+              kind='TEACHER'
+              selected={select}>
+              교직원 공지
+            </Btn>
           </div>
         </TopBox>
         <NotificationContainer>
@@ -97,16 +151,18 @@ const TopBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 320px;
-    span {
-      cursor: pointer;
-      font-size: 18px;
-      color: #7c7c7c;
-      transition: 0.1s ease-in-out;
-      &:hover {
-        opacity: 0.8;
-      }
-    }
   }
+`;
+
+const Btn = styled.div`
+  cursor: pointer;
+  font-size: 18px;
+  color: ${(prop) => (prop.selected === prop.kind ? "black" : "#7c7c7c")};
+  transition: 0.1s ease-in-out;
+  &:hover {
+    opacity: 0.8;
+  }
+  font-weight: ${(prop) => (prop.selected === prop.kind ? "400" : "100")};
 `;
 
 const NotificationContainer = styled.div`
