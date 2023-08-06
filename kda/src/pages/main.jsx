@@ -20,6 +20,10 @@ function MainPage() {
     setDate(new Date());
   };
 
+  useEffect(() => {
+    console.log(date.getDay());
+  }, []);
+
   return (
     <>
       <Header />
@@ -28,7 +32,8 @@ function MainPage() {
           <Body>
             <MainText>{data.name}님 반갑습니다!</MainText>
             <Timer>
-              오늘은 {date.getFullYear()}년 {date.getMonth()}월 {date.getDay()}
+              오늘은 {date.getFullYear()}년 {date.getMonth() + 1}월{" "}
+              {date.getDate()}
               일 입니다.
               <br />
               현재시간은 {date.getHours()}시 {date.getMinutes()}분{" "}
