@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
 import { useParams } from "react-router-dom";
-import { detailNoti } from "../apis/detialNotification";
+import { detailNoti } from "../apis/detailNotification";
 import timeSplit from "../utils/func/timeSplit";
 import dateSplit from "../utils/func/dateSplit";
 import contentSplit from "../utils/func/contentSplit";
-import { faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRotateLeft,
+  faPenToSquare,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { modalState, myInfoState } from "../utils/atom/atom";
+import { deleteNoti } from "../apis/deleteNotification";
 
 function NotificationDetailPage() {
   const { id } = useParams();
 
   const [notis, setNotis] = useState();
   const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+  const viewMyInfo = useRecoilValue(myInfoState);
+  const setModal = useSetRecoilState(modalState);
 
   const onExit = () => {
     window.location.href = `/notification`;
@@ -30,6 +39,21 @@ function NotificationDetailPage() {
       });
   }, []);
 
+  const onClick = () => {
+    deleteNoti(accessToken, id)
+      .then((res) => {
+        window.location.href = "/notification";
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onModify = () => {
+    window.location.href = `/notificationModify/${id}`;
+  };
+
   return (
     <>
       <Header />
@@ -44,9 +68,38 @@ function NotificationDetailPage() {
                 </span>
               </InfomationBox>
               <DetailBox>
-                <div>분류 : 교사</div>
-                <div>작성자 : {notis.name} (나)</div>
-                <div>afsdg</div>
+                <div>
+                  분류 :{" "}
+                  {notis.noti == "CLASS"
+                    ? "반공지"
+                    : notis.noti == "TEACHER"
+                    ? "교사"
+                    : notis.noti == "ALL"
+                    ? "전체"
+                    : null}
+                </div>
+                <div>
+                  작성자 : {notis.name}{" "}
+                  {notis.name == viewMyInfo.name ? <>(나)</> : null}
+                </div>
+                <div>
+                  {notis.name == viewMyInfo.name ? (
+                    <>
+                      <FontAwesomeIcon
+                        onClick={onModify}
+                        icon={faPenToSquare}
+                        fontSize={22}
+                        style={{ cursor: "pointer" }}
+                      />
+                      <FontAwesomeIcon
+                        onClick={onClick}
+                        icon={faTrashCan}
+                        fontSize={22}
+                        style={{ marginLeft: "20px", cursor: "pointer" }}
+                      />
+                    </>
+                  ) : null}
+                </div>
               </DetailBox>
             </TopBox>
             <ContentBox>
@@ -120,8 +173,16 @@ const DetailBox = styled.div`
     justify-content: end;
     color: #7c7c7c;
   }
-  :nth-child(2) {
+  > :nth-child(2) {
     margin: 10px 0;
+  }
+  :last-child {
+    height: 22px;
+    color: black;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 
