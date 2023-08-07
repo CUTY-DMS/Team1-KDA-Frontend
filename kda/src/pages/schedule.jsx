@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import Header from "../components/common/Header";
+import { schedule } from "../apis/schedule";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { scheduleDel } from "../apis/scheduleDelete";
+import { modalState } from "../utils/atom/atom";
+import { useSetRecoilState } from "recoil";
 
 function Schedule() {
+  const setState = useSetRecoilState(modalState);
   const [year, setYear] = useState(2023);
   const [page, setPage] = useState(0);
+  const [accessToken, setToken] = useState(localStorage.getItem("accessToken"));
+  const [scheduleList, setSchedule] = useState();
 
   const onYearChange = (where) => {
     if (where == "left") {
@@ -28,6 +37,28 @@ function Schedule() {
     }
   };
 
+  const onDelete = (id) => {
+    scheduleDel(accessToken, id)
+      .then((res) => {
+        console.log(res.data);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    schedule(accessToken)
+      .then((res) => {
+        setSchedule(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -39,33 +70,75 @@ function Schedule() {
           <RightYearController
             onClick={() => onYearChange("right")}></RightYearController>
         </YearBox>
-        <ListBox>
-          <List>
-            <ListHead>{1 + page * 3}월</ListHead>
-          </List>
-          <List>
-            <ListHead>{2 + page * 3}월</ListHead>
-          </List>
-          <List>
-            <ListHead>{3 + page * 3}월</ListHead>
-            <Item>afdghg1</Item>
-            <Item>afdghg2</Item>
-            <Item>afdghg</Item>
-            <Item>afdghg</Item>
-            <Item>afdghg</Item>
-            <Item>afdghg</Item>
-          </List>
-        </ListBox>
-        <PageBox>
-          <LeftPageController
-            onClick={() => onPageChange("left")}></LeftPageController>
-          <Page page={page} this={0}></Page>
-          <Page page={page} this={1}></Page>
-          <Page page={page} this={2}></Page>
-          <Page page={page} this={3}></Page>
-          <RightPageController
-            onClick={() => onPageChange("right")}></RightPageController>
-        </PageBox>
+        {scheduleList ? (
+          <>
+            <ListBox>
+              <List>
+                <ListHead>{1 + page * 3}월</ListHead>
+                {scheduleList.map((element) =>
+                  element.year == year && element.month == 1 + page * 3 ? (
+                    <Item>
+                      {element.day}일 | {element.title}
+                      <span
+                        onClick={() => {
+                          onDelete(element.id);
+                        }}>
+                        <FontAwesomeIcon icon={faTrashCan} fontSize={16} />
+                      </span>
+                    </Item>
+                  ) : null
+                )}
+              </List>
+              <List>
+                <ListHead>{2 + page * 3}월</ListHead>
+                {scheduleList.map((element) =>
+                  element.year == year && element.month == 2 + page * 3 ? (
+                    <Item>
+                      {element.day}일 | {element.title}
+                      <span
+                        onClick={() => {
+                          onDelete(element.id);
+                        }}>
+                        <FontAwesomeIcon icon={faTrashCan} fontSize={16} />
+                      </span>
+                    </Item>
+                  ) : null
+                )}
+              </List>
+              <List>
+                <ListHead>{3 + page * 3}월</ListHead>
+                {scheduleList.map((element) =>
+                  element.year == year && element.month == 3 + page * 3 ? (
+                    <Item>
+                      {element.day}일 | {element.title}
+                      <span
+                        onClick={() => {
+                          onDelete(element.id);
+                        }}>
+                        <FontAwesomeIcon icon={faTrashCan} fontSize={16} />
+                      </span>
+                    </Item>
+                  ) : null
+                )}
+              </List>
+            </ListBox>
+            <PageBox>
+              <LeftPageController
+                onClick={() => onPageChange("left")}></LeftPageController>
+              <Page page={page} this={0}></Page>
+              <Page page={page} this={1}></Page>
+              <Page page={page} this={2}></Page>
+              <Page page={page} this={3}></Page>
+              <RightPageController
+                onClick={() => onPageChange("right")}></RightPageController>
+            </PageBox>
+          </>
+        ) : (
+          <ErrorMsg>로딩중...</ErrorMsg>
+        )}
+        <AddBtn onClick={() => setState("scheduleCreate")}>
+          <FontAwesomeIcon icon={faXmark} fontSize={50} />
+        </AddBtn>
       </Body>
     </>
   );
@@ -77,6 +150,13 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const ErrorMsg = styled.div`
+  margin-top: 20vh;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
 `;
 
 const YearBox = styled.div`
@@ -148,10 +228,21 @@ const List = styled.div`
 `;
 
 const Item = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   height: 50px;
   padding-left: 20px;
+  box-shadow: 0px 2px rgba(0, 0, 0, 0.1);
+  span {
+    right: 20px;
+    position: absolute;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
 `;
 
 const ListHead = styled.div`
@@ -207,6 +298,26 @@ const RightPageController = styled.div`
   border-right: 20px solid transparent;
   transition: 0.2s ease-in-out;
   &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const AddBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  position: fixed;
+  right: 70px;
+  bottom: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #609960;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.2) rotate(135deg);
     opacity: 0.8;
   }
 `;
