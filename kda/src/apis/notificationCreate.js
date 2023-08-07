@@ -1,7 +1,7 @@
-import axios from "axios";
+import instance from "./axios";
 
 export const notificationCreate = async (data, accessToken) => {
-  const response = await axios.post(`/admin/write`, data, {
+  const response = await instance.post(`/admin/write`, data, {
     headers: {
       Authorization: accessToken,
     },
