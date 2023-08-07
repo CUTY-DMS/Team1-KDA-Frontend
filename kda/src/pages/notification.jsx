@@ -21,7 +21,7 @@ function NotificationPage() {
   const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
-    console.log(1234);
+    if (select !== "CLASS") return;
     classNoti(accessToken, viewGradeClass.grade, viewGradeClass.class)
       .then((res) => {
         setNotis(res.data.reverse());

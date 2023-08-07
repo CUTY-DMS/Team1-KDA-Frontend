@@ -33,7 +33,6 @@ function PasswordChangeModal() {
       })
       .catch((err) => {
         console.error(err.response.status);
-        alert("error");
       });
   };
 
