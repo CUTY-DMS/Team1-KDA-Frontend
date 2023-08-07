@@ -5,8 +5,8 @@ import PasswordChangeModal from "./passwordChangeModal";
 import InformationChangeModal from "./informationChangeModal";
 import GradeClassChangeModal from "./gradeClassChangeModal";
 import StudentModal from "./studentModal";
-import NotificationDeleteModal from "./notificationDeleteModal";
 import LogoutModal from "./logoutModal";
+import ScheduleCreateModal from "./scheduleCreateModal";
 
 export const Modal = () => {
   const modal = useRecoilValue(modalState);
@@ -22,10 +22,10 @@ export const Modal = () => {
       return <GradeClassChangeModal />;
     case "student":
       return <StudentModal />;
-    case "notiDel":
-      return <NotificationDeleteModal />;
     case "logout":
       return <LogoutModal />;
+    case "scheduleCreate":
+      return <ScheduleCreateModal />;
     default:
       return null;
   }
