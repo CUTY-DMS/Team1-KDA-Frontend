@@ -31,7 +31,7 @@ export const Router = () => {
           element={<NotificationCreatePage />}
         />
         <Route
-          path='/notificationModify'
+          path='/notificationModify/:id'
           element={<NotificationModifyPage />}
         />
         <Route path='/notification/:id' element={<NotificationDetailPage />} />
