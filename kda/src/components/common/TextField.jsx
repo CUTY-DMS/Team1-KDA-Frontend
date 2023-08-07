@@ -12,8 +12,10 @@ function TextField({ width, height, text, type, name, value, event }) {
     setFocus(true);
   };
 
-  const onBlur = (e) => {
-    if (input.current.value === "") setFocus(false);
+  const onBlur = () => {
+    if (input.current && input.current.value === "") {
+      setFocus(false);
+    }
   };
 
   const onClick = () => {
@@ -21,8 +23,8 @@ function TextField({ width, height, text, type, name, value, event }) {
   };
 
   const isType = () => {
-    if (type == "password") {
-      if (canSee === true) {
+    if (type === "password") {
+      if (canSee) {
         return "text";
       } else {
         return "password";
@@ -32,8 +34,10 @@ function TextField({ width, height, text, type, name, value, event }) {
   };
 
   useEffect(() => {
-    if (input.current.value !== "") setFocus(true);
-  }, []);
+    if (input.current && input.current.value !== "") {
+      setFocus(true);
+    }
+  }, [input.current && input.current.value]);
 
   return (
     <Wrapper width={width} height={height}>
@@ -51,21 +55,11 @@ function TextField({ width, height, text, type, name, value, event }) {
         className={type === "password" ? "password" : ""}
       />
       <Label upText={upText}>{text}</Label>
-      {type === "password" ? (
-        <>
-          {canSee ? (
-            <Eye width={width} upText={upText} onClick={onClick}>
-              <FontAwesomeIcon
-                icon={faEyeSlash}
-                fontSize={20}></FontAwesomeIcon>
-            </Eye>
-          ) : (
-            <Eye width={width} upText={upText} onClick={onClick}>
-              <FontAwesomeIcon icon={faEye} fontSize={20}></FontAwesomeIcon>
-            </Eye>
-          )}
-        </>
-      ) : null}
+      {type === "password" && (
+        <Eye width={width} upText={upText} onClick={onClick}>
+          <FontAwesomeIcon icon={canSee ? faEyeSlash : faEye} fontSize={20} />
+        </Eye>
+      )}
     </Wrapper>
   );
 }
