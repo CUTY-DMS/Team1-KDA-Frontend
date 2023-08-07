@@ -52,13 +52,13 @@ function Header() {
             onClick={() => onHref("calender")}
             path={path}
             this={"calender"}>
-            일정
+            시간표
           </LeftBoxText>
           <LeftBoxText
             onClick={() => onHref("schedule")}
             path={path}
             this={"schedule"}>
-            시간표
+            일정
           </LeftBoxText>
         </LeftBox>
         <RightBox>
@@ -92,6 +92,7 @@ const Body = styled.div`
 const Wrapper = styled.div`
   position: fixed;
   width: 100%;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
