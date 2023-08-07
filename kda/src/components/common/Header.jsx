@@ -49,12 +49,6 @@ function Header() {
             공지
           </LeftBoxText>
           <LeftBoxText
-            onClick={() => onHref("calender")}
-            path={path}
-            this={"calender"}>
-            시간표
-          </LeftBoxText>
-          <LeftBoxText
             onClick={() => onHref("schedule")}
             path={path}
             this={"schedule"}>
@@ -102,7 +96,7 @@ const Wrapper = styled.div`
 const LeftBox = styled.div`
   margin-left: 128px;
   display: flex;
-  width: 634px;
+  width: 500px;
   height: 80px;
   justify-content: space-between;
   align-items: center;

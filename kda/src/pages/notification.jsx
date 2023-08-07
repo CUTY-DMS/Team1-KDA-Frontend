@@ -21,6 +21,18 @@ function NotificationPage() {
   const setModal = useSetRecoilState(modalState);
 
   useEffect(() => {
+    console.log(1234);
+    classNoti(accessToken, viewGradeClass.grade, viewGradeClass.class)
+      .then((res) => {
+        setNotis(res.data.reverse());
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [viewGradeClass]);
+
+  useEffect(() => {
     if (select == "ALL") {
       allNoti(accessToken)
         .then((res) => {
@@ -41,18 +53,6 @@ function NotificationPage() {
         });
     }
   }, [select]);
-
-  useEffect(() => {
-    console.log(1234);
-    classNoti(accessToken, viewGradeClass.grade, viewGradeClass.class)
-      .then((res) => {
-        setNotis(res.data.reverse());
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [viewGradeClass]);
 
   const onClick = (id) => {
     window.location.href = `/notification/${id}`;
